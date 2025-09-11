@@ -1,0 +1,193 @@
+/* Ocean Background Enhancements */
+
+/* Animated wave overlay for hero section */
+.hero .wave-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(circle at 25% 25%, rgba(34, 211, 238, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 75% 75%, rgba(14, 165, 233, 0.1) 0%, transparent 50%);
+    animation: waveFlow 15s ease-in-out infinite;
+    z-index: 1;
+}
+
+@keyframes waveFlow {
+    0%, 100% {
+        background-position: 0% 0%, 100% 100%;
+    }
+    50% {
+        background-position: 100% 50%, 0% 50%;
+    }
+}
+
+/* Floating particles effect */
+.ocean-particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: rgba(34, 211, 238, 0.6);
+    border-radius: 50%;
+    animation: float 20s infinite linear;
+}
+
+.particle:nth-child(2n) {
+    background: rgba(167, 243, 208, 0.4);
+    animation-duration: 25s;
+    width: 3px;
+    height: 3px;
+}
+
+.particle:nth-child(3n) {
+    background: rgba(14, 165, 233, 0.3);
+    animation-duration: 30s;
+    width: 2px;
+    height: 2px;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(100vh) translateX(0px) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-10vh) translateX(100px) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* Enhanced section transitions */
+.section-transition {
+    position: relative;
+    overflow: hidden;
+}
+
+.section-transition::before {
+    content: '';
+    position: absolute;
+    top: -50px;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background: linear-gradient(135deg, transparent 0%, rgba(34, 211, 238, 0.1) 50%, transparent 100%);
+    transform: skewY(-2deg);
+    z-index: 1;
+}
+
+/* Ocean depth effect for dashboard */
+.dashboard-depth-effect {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 20% 30%, rgba(34, 211, 238, 0.05) 0%, transparent 40%),
+        radial-gradient(circle at 80% 70%, rgba(8, 145, 178, 0.05) 0%, transparent 40%),
+        radial-gradient(circle at 50% 50%, rgba(15, 23, 42, 0.05) 0%, transparent 60%);
+    animation: depthShift 20s ease-in-out infinite;
+    pointer-events: none;
+    z-index: -1;
+}
+
+@keyframes depthShift {
+    0%, 100% {
+        transform: scale(1) rotate(0deg);
+    }
+    50% {
+        transform: scale(1.1) rotate(1deg);
+    }
+}
+
+/* Bubble animation for interactive elements */
+.bubble-effect {
+    position: relative;
+    overflow: hidden;
+}
+
+.bubble-effect::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    width: 10px;
+    height: 10px;
+    background: rgba(34, 211, 238, 0.3);
+    border-radius: 50%;
+    animation: bubble 3s ease-in-out infinite;
+    transform: translateX(-50%);
+}
+
+@keyframes bubble {
+    0% {
+        transform: translateX(-50%) translateY(0) scale(0);
+        opacity: 0;
+    }
+    50% {
+        transform: translateX(-50%) translateY(-50px) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(-50%) translateY(-100px) scale(0);
+        opacity: 0;
+    }
+}
+
+/* Improved mobile background handling */
+@media (max-width: 768px) {
+    body {
+        background-attachment: scroll;
+    }
+    
+    .hero {
+        background-attachment: scroll;
+    }
+    
+    .features, .demo, .contact {
+        background-attachment: scroll;
+    }
+}
+
+/* Loading animation for background images */
+.bg-loading {
+    background-color: var(--ocean-blue);
+    position: relative;
+}
+
+.bg-loading::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+    0% {
+        left: -100%;
+    }
+    100% {
+        left: 100%;
+    }
+}

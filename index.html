@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OceanAI - Intelligent Oceanographic Data System</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Ocean Explorer Sidebar -->
+    <div class="ocean-explorer-sidebar" id="oceanSidebar">
+        <div class="sidebar-header">
+            <h2><i class="fas fa-compass"></i> Ocean Explorer</h2>
+            <button class="sidebar-toggle" id="sidebarToggle">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+        </div>
+        
+        <div class="sidebar-content">
+            <div class="ocean-section" data-ocean="pacific">
+                <div class="ocean-header">
+                    <div class="ocean-icon pacific-icon">
+                        <i class="fas fa-water"></i>
+                    </div>
+                    <h3>Pacific Ocean</h3>
+                    <span class="ocean-subtitle">The Vast Blue</span>
+                </div>
+                <div class="ocean-details">
+                    <div class="ocean-stats">
+                        <div class="stat-item">
+                            <span class="stat-value">165.2M</span>
+                            <span class="stat-label">km² Area</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">4,280m</span>
+                            <span class="stat-label">Avg Depth</span>
+                        </div>
+                    </div>
+                    <div class="marine-life">
+                        <h4><i class="fas fa-fish"></i> Marine Life</h4>
+                        <div class="creatures">
+                            <div class="creature-card">
+                                <div class="creature-icon">🐋</div>
+                                <div class="creature-info">
+                                    <span class="creature-name">Blue Whale</span>
+                                    <span class="creature-detail">Largest animal on Earth</span>
+                                </div>
+                            </div>
+                            <div class="creature-card">
+                                <div class="creature-icon">🦈</div>
+                                <div class="creature-info">
+                                    <span class="creature-name">Great White Shark</span>
+                                    <span class="creature-detail">Apex predator</span>
+                                </div>
+                            </div>
+                            <div class="creature-card">
+                                <div class="creature-icon">🐙</div>
+                                <div class="creature-info">
+                                    <span class="creature-name">Giant Pacific Octopus</span>
+                                    <span class="creature-detail">Intelligent invertebrate</span>
+                                </div>
+                            </div>
+                            <div class="creature-card">
+                                <div class="creature-icon">🐢</div>
+                                <div class="creature-info">
+                                    <span class="creature-name">Leatherback Turtle</span>
+                                    <span class="creature-detail">Ancient navigator</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ocean-history">
+                        <h4><i class="fas fa-history"></i> Historical Facts</h4>
+                        <ul class="history-list">
+                            <li>Named by Ferdinand Magellan in 1521</li>
+                            <li>Contains the Mariana Trench (deepest point on Earth)</li>
+                            <li>Ring of Fire - 75% of world's active volcanoes</li>
+                            <li>Home to over 25,000 islands</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ocean-section" data-ocean="atlantic">
+                <div class="ocean-header">
+                    <div class="ocean-icon atlantic-icon">
+                        <i class="fas fa-anchor"></i>
+                    </div>
+                    <h3>Atlantic Ocean</h3>
+                    <span class="ocean-subtitle">The Historic Sea</span>
+                </div>
+                <div class="ocean-details">
+                    <div class="ocean-stats">
+                        <div class="stat-item">
+                            <span class="stat-value">106.5M</span>
+                            <span class="stat-label">km² Area</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">3,646m</span>
+                            <span class="stat-label">Avg Depth</span>
+                        </div>
+                    </div>
+                    <div class="marine-life">
+                        <h4><i class="fas fa-fish"></i> Marine Life</h4>
+                        <div class="creatures">
+                            <div class="creature-card">
+                                <div class="creature-icon">🐬</div>
+                                <div class="creature-info">
+                                    <span class="creature-name">Atlantic Dolphin</span>
+                                    <span class="creature-detail">Social marine mammal</span>
+                                </div>
+                            </div>
+                            <div class="creature-card">
+                                <div class="creature-icon">🦭</div>
+                                <div class="creature-info">
+                                    <span class="creature-name">Atlantic Seal</span>
+                                    <span class="creature-detail">Coastal dweller</span>
+                                </div>
+                            </div>
+                            <div class="creature-card">
+                                <div class="creature-icon">🐟</div>
+                                <div class="creature-info">
+                                    <span class="creature-name">Atlantic Bluefin Tuna</span>
+                                    <span class="creature-detail">Prized game fish</span>
+                                </div>
+                            </div>
+                            <div class="creature-card">
+                                <div class="creature-icon">🦀</div>
+                                <div class="creature-info">
+                                    <span class="creature-name">Atlantic Blue Crab</span>
+                                    <span class="creature-detail">Coastal delicacy</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ocean-history">
+                        <h4><i class="fas fa-history"></i> Historical Facts</h4>
+                        <ul class="history-list">
+                            <li>Site of the Titanic tragedy (1912)</li>
+                            <li>First ocean crossed by aircraft (1919)</li>
+                            <li>Mid-Atlantic Ridge spreads 2.5cm/year</li>
+                            <li>Major shipping route for centuries</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ocean-section" data-ocean="indian">
+                <div class="ocean-header">
+                    <div class="ocean-icon indian-icon">
+                        <i class="fas fa-sun"></i>
+                    </div>
+                    <h3>Indian Ocean</h3>
+                    <span class="ocean-subtitle">The Warm Waters</span>
+                </div>
+                <div class="ocean-details">
+                    <div class="ocean-stats">
+                        <div class="stat-item">
+                            <span class="stat-value">70.6M</span>
+                            <span class="stat-label">km² Area</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">3,741m</span>
+                            <span class="stat-label">Avg Depth</span>
+                        </div>
+                    </div>
+                    <div class="marine-life">
+                        <h4><i class="fas fa-fish"></i> Marine Life</h4>
+                        <div class="creatures">
+                            <div class="creature-card">
+                                <div class="creature-icon">🐠</div>
+                                <div class="creature-info">
+                                    <span class="creature-name">Maldivian Clownfish</span>
+                                    <span class="creature-detail">Coral reef resident</span>
+                                </div>
+                            </div>
+                            <div class="creature-card">
+                                <div class="creature-icon">🦈</div>
+                                <div class="creature-info">
+                                    <span class="creature-name">Whale Shark</span>
+                                    <span class="creature-detail">Gentle giant filter feeder</span>
+                                </div>
+                            </div>
+                            <div class="creature-card">
+                                <div class="creature-icon">🐙</div>
+                                <div class="creature-info">
+                                    <span class="creature-name">Coconut Octopus</span>
+                                    <span class="creature-detail">Tool-using cephalopod</span>
+                                </div>
+                            </div>
+                            <div class="creature-card">
+                                <div class="creature-icon">🦐</div>
+                                <div class="creature-info">
+                                    <span class="creature-name">Mantis Shrimp</span>
+                                    <span class="creature-detail">Rainbow-colored predator</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ocean-history">
+                        <h4><i class="fas fa-history"></i> Historical Facts</h4>
+                        <ul class="history-list">
+                            <li>Ancient spice trade routes hub</li>
+                            <li>2004 Indian Ocean Tsunami originated here</li>
+                            <li>Monsoon patterns govern regional climate</li>
+                            <li>Birthplace of Homo sapiens migration</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ocean-section" data-ocean="arctic">
+                <div class="ocean-header">
+                    <div class="ocean-icon arctic-icon">
+                        <i class="fas fa-snowflake"></i>
+                    </div>
+                    <h3>Arctic Ocean</h3>
+                    <span class="ocean-subtitle">The Frozen Frontier</span>
+                </div>
+                <div class="ocean-details">
+                    <div class="ocean-stats">
+                        <div class="stat-item">
+                            <span class="stat-value">14.1M</span>
+                            <span class="stat-label">km² Area</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">1,038m</span>
+                            <span class="stat-label">Avg Depth</span>
+                        </div>
+                    </div>
+                    <div class="marine-life">
+                        <h4><i class="fas fa-fish"></i> Marine Life</h4>
+                        <div class="creatures">
+                            <div class="creature-card">
+                                <div class="creature-icon">🐻‍❄️</div>
+                                <div class="creature-info">
+                                    <span class="creature-name">Polar Bear</span>
+                                    <span class="creature-detail">Arctic apex predator</span>
+                                </div>
+                            </div>
+                            <div class="creature-card">
+                                <div class="creature-icon">🦭</div>
+                                <div class="creature-info">
+                                    <span class="creature-name">Arctic Seal</span>
+                                    <span class="creature-detail">Ice-adapted marine mammal</span>
+                                </div>
+                            </div>
+                            <div class="creature-card">
+                                <div class="creature-icon">🐋</div>
+                                <div class="creature-info">
+                                    <span class="creature-name">Narwhal</span>
+                                    <span class="creature-detail">Unicorn of the sea</span>
+                                </div>
+                            </div>
+                            <div class="creature-card">
+                                <div class="creature-icon">🐧</div>
+                                <div class="creature-info">
+                                    <span class="creature-name">Arctic Tern</span>
+                                    <span class="creature-detail">Epic migrator</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ocean-history">
+                        <h4><i class="fas fa-history"></i> Historical Facts</h4>
+                        <ul class="history-list">
+                            <li>Northwest Passage sought for centuries</li>
+                            <li>First surface crossing in 1958 by USS Nautilus</li>
+                            <li>Climate change most visible here</li>
+                            <li>Indigenous peoples' homeland for millennia</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ocean-section" data-ocean="southern">
+                <div class="ocean-header">
+                    <div class="ocean-icon southern-icon">
+                        <i class="fas fa-mountain"></i>
+                    </div>
+                    <h3>Southern Ocean</h3>
+                    <span class="ocean-subtitle">The Circumpolar Current</span>
+                </div>
+                <div class="ocean-details">
+                    <div class="ocean-stats">
+                        <div class="stat-item">
+                            <span class="stat-value">20.3M</span>
+                            <span class="stat-label">km² Area</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">3,270m</span>
+                            <span class="stat-label">Avg Depth</span>
+                        </div>
+                    </div>
+                    <div class="marine-life">
+                        <h4><i class="fas fa-fish"></i> Marine Life</h4>
+                        <div class="creatures">
+                            <div class="creature-card">
+                                <div class="creature-icon">🐧</div>
+                                <div class="creature-info">
+                                    <span class="creature-name">Emperor Penguin</span>
+                                    <span class="creature-detail">Antarctic royalty</span>
+                                </div>
+                            </div>
+                            <div class="creature-card">
+                                <div class="creature-icon">🐋</div>
+                                <div class="creature-info">
+                                    <span class="creature-name">Antarctic Blue Whale</span>
+                                    <span class="creature-detail">Southern giant</span>
+                                </div>
+                            </div>
+                            <div class="creature-card">
+                                <div class="creature-icon">🦭</div>
+                                <div class="creature-info">
+                                    <span class="creature-name">Leopard Seal</span>
+                                    <span class="creature-detail">Fierce Antarctic predator</span>
+                                </div>
+                            </div>
+                            <div class="creature-card">
+                                <div class="creature-icon">🦐</div>
+                                <div class="creature-info">
+                                    <span class="creature-name">Antarctic Krill</span>
+                                    <span class="creature-detail">Foundation of food web</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ocean-history">
+                        <h4><i class="fas fa-history"></i> Historical Facts</h4>
+                        <ul class="history-list">
+                            <li>Youngest ocean, recognized in 2000</li>
+                            <li>Antarctic Treaty System protects it</li>
+                            <li>Drives global ocean circulation</li>
+                            <li>Key to understanding climate change</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="sidebar-footer">
+            <div class="ocean-fact">
+                <i class="fas fa-lightbulb"></i>
+                <span id="randomFact">Did you know? Oceans produce 70% of our oxygen!</span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Sidebar Toggle Button -->
+    <button class="sidebar-trigger" id="sidebarTrigger">
+        <i class="fas fa-compass"></i>
+        <span>Explore Oceans</span>
+    </button>
+
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-water"></i>
+                <span>OceanAI</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#features" class="nav-link">Features</a></li>
+                <li><a href="#technology" class="nav-link">Technology</a></li>
+                <li><a href="#demo" class="nav-link">Demo</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+                <li><a href="dashboard.html" class="nav-link dashboard-link">
+                    <i class="fas fa-chart-pie"></i> Dashboard
+                </a></li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    Democratizing <span class="gradient-text">Ocean Data</span> 
+                    with AI
+                </h1>
+                <p class="hero-subtitle">
+                    An intelligent conversational system that makes ARGO oceanographic data accessible 
+                    through natural language queries and stunning visualizations.
+                </p>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary">
+                        <i class="fas fa-rocket"></i>
+                        Explore Demo
+                    </button>
+                    <button class="btn btn-secondary">
+                        <i class="fas fa-book"></i>
+                        Documentation
+                    </button>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-number" data-target="10000">0</span>
+                        <span class="stat-label">ARGO Floats</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number" data-target="500">0</span>
+                        <span class="stat-label">TB of Data</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number" data-target="99">0</span>
+                        <span class="stat-label">% Uptime</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="ocean-animation">
+                    <div class="wave wave1"></div>
+                    <div class="wave wave2"></div>
+                    <div class="wave wave3"></div>
+                    <div class="float-visualization">
+                        <div class="argo-float">
+                            <div class="float-body"></div>
+                            <div class="data-stream">
+                                <div class="data-point"></div>
+                                <div class="data-point"></div>
+                                <div class="data-point"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>Revolutionary Ocean Data Access</h2>
+                <p>Bridging the gap between complex oceanographic data and intuitive user experience</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h3>Natural Language Queries</h3>
+                    <p>Ask questions in plain English like "Show me salinity profiles near the equator" and get instant, accurate results.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Interactive Visualizations</h3>
+                    <p>Beautiful, interactive charts and maps powered by Plotly and Leaflet for comprehensive data exploration.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h3>Multi-Format Support</h3>
+                    <p>Seamlessly handles NetCDF, SQL, Parquet, and ASCII formats with automatic conversion and optimization.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>AI-Powered Intelligence</h3>
+                    <p>Advanced RAG pipelines with multimodal LLMs for intelligent query interpretation and response generation.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h3>Global Ocean Coverage</h3>
+                    <p>Access data from thousands of ARGO floats worldwide with real-time updates and historical analysis.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>User-Friendly Interface</h3>
+                    <p>Designed for both technical experts and non-technical users with intuitive dashboards and guided workflows.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technology Stack -->
+    <section id="technology" class="technology">
+        <div class="container">
+            <div class="section-header">
+                <h2>Advanced Technology Stack</h2>
+                <p>Built with cutting-edge technologies for maximum performance and scalability</p>
+            </div>
+            <div class="tech-categories">
+                <div class="tech-category">
+                    <h3><i class="fas fa-robot"></i> AI & Machine Learning</h3>
+                    <div class="tech-items">
+                        <div class="tech-item">
+                            <i class="fab fa-python"></i>
+                            <span>GPT / QWEN / LLaMA</span>
+                        </div>
+                        <div class="tech-item">
+                            <i class="fas fa-search"></i>
+                            <span>FAISS / Chroma</span>
+                        </div>
+                        <div class="tech-item">
+                            <i class="fas fa-brain"></i>
+                            <span>RAG Pipelines</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="tech-category">
+                    <h3><i class="fas fa-database"></i> Data & Storage</h3>
+                    <div class="tech-items">
+                        <div class="tech-item">
+                            <i class="fas fa-elephant"></i>
+                            <span>PostgreSQL</span>
+                        </div>
+                        <div class="tech-item">
+                            <i class="fas fa-file-alt"></i>
+                            <span>NetCDF / Parquet</span>
+                        </div>
+                        <div class="tech-item">
+                            <i class="fas fa-vector-square"></i>
+                            <span>Vector Database</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="tech-category">
+                    <h3><i class="fas fa-chart-bar"></i> Visualization</h3>
+                    <div class="tech-items">
+                        <div class="tech-item">
+                            <i class="fas fa-chart-line"></i>
+                            <span>Plotly</span>
+                        </div>
+                        <div class="tech-item">
+                            <i class="fas fa-map"></i>
+                            <span>Leaflet / Cesium</span>
+                        </div>
+                        <div class="tech-item">
+                            <i class="fab fa-python"></i>
+                            <span>Streamlit / Dash</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo Section -->
+    <section id="demo" class="demo">
+        <div class="container">
+            <div class="section-header">
+                <h2>See It In Action</h2>
+                <p>Experience the power of AI-driven oceanographic data analysis</p>
+            </div>
+            
+            <div class="demo-interface">
+                <div class="chat-demo">
+                    <div class="chat-header">
+                        <i class="fas fa-robot"></i>
+                        <span>OceanAI Assistant</span>
+                        <div class="status-indicator"></div>
+                    </div>
+                    <div class="chat-messages">
+                        <div class="message user-message">
+                            <div class="message-content">
+                                Show me salinity profiles near the equator in March 2023
+                            </div>
+                            <div class="message-time">10:30 AM</div>
+                        </div>
+                        <div class="message ai-message">
+                            <div class="message-content">
+                                I found 127 ARGO profiles near the equator (±5°) for March 2023. Here's the visualization showing salinity variations with depth.
+                            </div>
+                            <div class="message-time">10:30 AM</div>
+                        </div>
+                        <div class="message user-message">
+                            <div class="message-content">
+                                Compare BGC parameters in the Arabian Sea for the last 6 months
+                            </div>
+                            <div class="message-time">10:32 AM</div>
+                        </div>
+                        <div class="message ai-message typing">
+                            <div class="typing-indicator">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chat-input">
+                        <input type="text" placeholder="Ask about ocean data...">
+                        <button><i class="fas fa-paper-plane"></i></button>
+                    </div>
+                </div>
+                
+                <div class="demo-visualizations">
+                    <div class="viz-container">
+                        <div class="viz-header">
+                            <h4>Salinity Profile Visualization</h4>
+                            <div class="viz-controls">
+                                <button class="viz-btn active">Profile</button>
+                                <button class="viz-btn">Map</button>
+                                <button class="viz-btn">Time Series</button>
+                            </div>
+                        </div>
+                        <div class="mock-chart">
+                            <div class="chart-axes">
+                                <div class="y-axis">
+                                    <span>0m</span>
+                                    <span>500m</span>
+                                    <span>1000m</span>
+                                    <span>1500m</span>
+                                    <span>2000m</span>
+                                </div>
+                                <div class="x-axis">
+                                    <span>34.0</span>
+                                    <span>34.5</span>
+                                    <span>35.0</span>
+                                    <span>35.5</span>
+                                </div>
+                            </div>
+                            <div class="chart-area">
+                                <svg class="profile-line">
+                                    <path d="M 0 20 Q 30 40 60 80 T 120 140 T 180 160" stroke="#0ea5e9" stroke-width="2" fill="none"/>
+                                    <path d="M 10 25 Q 35 45 65 85 T 125 145 T 185 165" stroke="#06b6d4" stroke-width="2" fill="none"/>
+                                    <path d="M 5 30 Q 40 50 70 90 T 130 150 T 190 170" stroke="#0891b2" stroke-width="2" fill="none"/>
+                                </svg>
+                                <div class="data-points">
+                                    <div class="data-point" style="left: 10%; top: 20%"></div>
+                                    <div class="data-point" style="left: 30%; top: 40%"></div>
+                                    <div class="data-point" style="left: 60%; top: 70%"></div>
+                                    <div class="data-point" style="left: 80%; top: 85%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chart-legend">
+                            <div class="legend-item">
+                                <div class="legend-color" style="background: #0ea5e9"></div>
+                                <span>Float 1234567</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-color" style="background: #06b6d4"></div>
+                                <span>Float 2345678</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-color" style="background: #0891b2"></div>
+                                <span>Float 3456789</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="demo-examples">
+                <h3>Try These Example Queries</h3>
+                <div class="example-queries">
+                    <div class="query-card">
+                        <i class="fas fa-thermometer-half"></i>
+                        <span>"Show temperature anomalies in the Pacific for 2023"</span>
+                    </div>
+                    <div class="query-card">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>"Find nearest ARGO floats to coordinates 25°N, 70°E"</span>
+                    </div>
+                    <div class="query-card">
+                        <i class="fas fa-chart-area"></i>
+                        <span>"Compare oxygen levels in Indian Ocean vs Atlantic"</span>
+                    </div>
+                    <div class="query-card">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>"Seasonal variations in Arabian Sea salinity"</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2>Get Started Today</h2>
+                <p>Ready to revolutionize your oceanographic data analysis?</p>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Contact Information</h3>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>contact@oceanai.project</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>+1 (555) 123-4567</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Ocean Research Institute</span>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form>
+                        <div class="form-group">
+                            <input type="text" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" placeholder="Your Email" required>
+                        </div>
+                        <div class="form-group">
+                            <select required>
+                                <option value="">Select Interest</option>
+                                <option value="demo">Request Demo</option>
+                                <option value="collaboration">Research Collaboration</option>
+                                <option value="data">Data Access</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <textarea placeholder="Your Message" rows="4" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-paper-plane"></i>
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <i class="fas fa-water"></i>
+                        <span>OceanAI</span>
+                    </div>
+                    <p>Democratizing access to oceanographic data through intelligent AI systems.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Product</h4>
+                    <ul>
+                        <li><a href="#">Features</a></li>
+                        <li><a href="#">API Documentation</a></li>
+                        <li><a href="#">Data Sources</a></li>
+                        <li><a href="#">Pricing</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="#">Documentation</a></li>
+                        <li><a href="#">Tutorials</a></li>
+                        <li><a href="#">Research Papers</a></li>
+                        <li><a href="#">Community</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Status</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 OceanAI Project. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

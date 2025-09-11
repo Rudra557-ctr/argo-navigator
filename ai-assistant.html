@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OceanAI Assistant - Intelligent Ocean Data Chat</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="background-enhancements.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="ai-assistant-page">
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h1><i class="fas fa-water"></i> OceanAI</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="dashboard.html" class="nav-link"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+                <li><a href="indian-ocean.html" class="nav-link"><i class="fas fa-sun"></i> Indian Ocean</a></li>
+                <li><a href="ai-assistant.html" class="nav-link active"><i class="fas fa-robot"></i> AI Assistant</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- AI Assistant Header -->
+    <section class="ai-assistant-header">
+        <div class="container">
+            <div class="assistant-intro">
+                <div class="assistant-avatar">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <div class="assistant-info">
+                    <h1>OceanAI Assistant</h1>
+                    <p>Your intelligent oceanographic data companion. Ask me anything about ocean data, ARGO floats, marine life, or ocean analysis!</p>
+                    <div class="assistant-status">
+                        <div class="status-indicator online"></div>
+                        <span>Online & Ready</span>
+                    </div>
+                </div>
+            </div>
+            <div class="quick-suggestions">
+                <h3>Popular Questions</h3>
+                <div class="suggestions-grid">
+                    <button class="suggestion-btn" onclick="sendSuggestion(this)">
+                        <i class="fas fa-thermometer-half"></i>
+                        <span>"Show me temperature trends in the Pacific Ocean"</span>
+                    </button>
+                    <button class="suggestion-btn" onclick="sendSuggestion(this)">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>"Find ARGO floats near coordinates 25°N, 70°E"</span>
+                    </button>
+                    <button class="suggestion-btn" onclick="sendSuggestion(this)">
+                        <i class="fas fa-chart-area"></i>
+                        <span>"Compare salinity levels between oceans"</span>
+                    </button>
+                    <button class="suggestion-btn" onclick="sendSuggestion(this)">
+                        <i class="fas fa-fish"></i>
+                        <span>"What marine life is found in the Indian Ocean?"</span>
+                    </button>
+                    <button class="suggestion-btn" onclick="sendSuggestion(this)">
+                        <i class="fas fa-wave-square"></i>
+                        <span>"Explain ocean currents and their impact"</span>
+                    </button>
+                    <button class="suggestion-btn" onclick="sendSuggestion(this)">
+                        <i class="fas fa-satellite"></i>
+                        <span>"How do ARGO floats collect data?"</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Chat Interface -->
+    <main class="chat-container">
+        <div class="chat-wrapper">
+            <!-- Chat Messages Area -->
+            <div class="chat-messages-container">
+                <div class="chat-messages" id="chatMessages">
+                    <div class="message ai-message welcome-message">
+                        <div class="message-avatar">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div class="message-content">
+                            <div class="message-text">
+                                Welcome to OceanAI Assistant! I'm here to help you explore and understand oceanographic data. I can assist you with:
+                                <ul>
+                                    <li>🌊 Ocean temperature and salinity analysis</li>
+                                    <li>📍 ARGO float locations and data</li>
+                                    <li>🐠 Marine biodiversity information</li>
+                                    <li>📊 Data visualization and trends</li>
+                                    <li>🔬 Scientific explanations and insights</li>
+                                </ul>
+                                What would you like to know about our oceans?
+                            </div>
+                            <div class="message-time">Just now</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chat Input Area -->
+            <div class="chat-input-container">
+                <div class="typing-indicator" id="typingIndicator" style="display: none;">
+                    <div class="typing-avatar">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="typing-text">
+                        <span>OceanAI is typing</span>
+                        <div class="typing-dots">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                </div>
+                
+                <form class="chat-input-form" id="chatForm">
+                    <div class="input-wrapper">
+                        <input 
+                            type="text" 
+                            id="chatInput" 
+                            placeholder="Ask me about ocean data, marine life, or anything oceanographic..." 
+                            autocomplete="off"
+                        >
+                        <button type="button" class="attach-btn" title="Attach file">
+                            <i class="fas fa-paperclip"></i>
+                        </button>
+                        <button type="submit" class="send-btn" id="sendBtn">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Chat Sidebar -->
+        <div class="chat-sidebar">
+            <div class="sidebar-section">
+                <h3><i class="fas fa-history"></i> Recent Conversations</h3>
+                <div class="conversation-list">
+                    <div class="conversation-item active">
+                        <div class="conversation-title">Ocean Temperature Analysis</div>
+                        <div class="conversation-preview">Pacific temperature trends...</div>
+                        <div class="conversation-time">5 min ago</div>
+                    </div>
+                    <div class="conversation-item">
+                        <div class="conversation-title">ARGO Float Data</div>
+                        <div class="conversation-preview">Float locations near...</div>
+                        <div class="conversation-time">1 hour ago</div>
+                    </div>
+                    <div class="conversation-item">
+                        <div class="conversation-title">Marine Biodiversity</div>
+                        <div class="conversation-preview">Species in Indian Ocean...</div>
+                        <div class="conversation-time">Yesterday</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <h3><i class="fas fa-lightbulb"></i> Quick Tips</h3>
+                <div class="tips-list">
+                    <div class="tip-item">
+                        <i class="fas fa-map"></i>
+                        <span>Use coordinates for specific location queries</span>
+                    </div>
+                    <div class="tip-item">
+                        <i class="fas fa-calendar"></i>
+                        <span>Specify date ranges for temporal analysis</span>
+                    </div>
+                    <div class="tip-item">
+                        <i class="fas fa-layer-group"></i>
+                        <span>Ask for depth profiles and vertical sections</span>
+                    </div>
+                    <div class="tip-item">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Request visualizations and comparisons</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <h3><i class="fas fa-cog"></i> Settings</h3>
+                <div class="settings-list">
+                    <div class="setting-item">
+                        <span>Response Detail Level</span>
+                        <select class="setting-select">
+                            <option>Detailed</option>
+                            <option>Concise</option>
+                            <option>Technical</option>
+                        </select>
+                    </div>
+                    <div class="setting-item">
+                        <span>Auto-generate Visualizations</span>
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <span>Include Scientific Citations</span>
+                        <label class="toggle-switch">
+                            <input type="checkbox">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="chat-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <p><i class="fas fa-info-circle"></i> OceanAI Assistant is powered by advanced AI and real oceanographic data from ARGO floats worldwide.</p>
+                </div>
+                <div class="footer-actions">
+                    <button class="footer-btn" onclick="clearChat()">
+                        <i class="fas fa-trash"></i> Clear Chat
+                    </button>
+                    <button class="footer-btn" onclick="exportChat()">
+                        <i class="fas fa-download"></i> Export Conversation
+                    </button>
+                    <button class="footer-btn" onclick="shareChat()">
+                        <i class="fas fa-share"></i> Share
+                    </button>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // AI Assistant specific functionality
+        const chatForm = document.getElementById('chatForm');
+        const chatInput = document.getElementById('chatInput');
+        const chatMessages = document.getElementById('chatMessages');
+        const sendBtn = document.getElementById('sendBtn');
+        const typingIndicator = document.getElementById('typingIndicator');
+
+        // Comprehensive AI responses for different ocean topics
+        const aiResponses = {
+            temperature: [
+                "Based on the latest ARGO data, I can see interesting temperature patterns. The Pacific Ocean shows a warming trend of approximately 0.3°C over the past decade, with the most significant changes occurring in the upper 200 meters. Would you like me to show you specific depth profiles or regional variations?",
+                "Ocean temperatures vary significantly by region and depth. The Indian Ocean maintains the warmest average temperatures at 28°C surface level, while the Arctic Ocean averages around -1.8°C. Current ARGO float data shows seasonal variations of 2-4°C in temperate regions.",
+                "Temperature anomalies this year show El Niño influences in the Pacific, with above-average temperatures along the equatorial regions. I can generate a detailed analysis of how these patterns affect marine ecosystems if you're interested."
+            ],
+            salinity: [
+                "Salinity levels provide fascinating insights into ocean circulation! The global average is 35 PSU, but I'm seeing interesting variations. The Red Sea reaches 40+ PSU due to high evaporation, while the Baltic Sea drops to 7-8 PSU from freshwater influx. ARGO data shows these patterns influence deep water formation.",
+                "Recent salinity data reveals important climate indicators. The Atlantic's salinity has been increasing slightly due to enhanced evaporation, while the Arctic shows freshening from ice melt. These changes affect thermohaline circulation patterns globally.",
+                "Salinity stratification is crucial for marine life distribution. I can show you how the halocline (rapid salinity change zone) affects nutrient distribution and impacts biodiversity in different ocean regions."
+            ],
+            argo: [
+                "ARGO floats are amazing autonomous instruments! Currently, there are about 4,000 active floats globally, each diving to 2000m depth every 10 days. They measure temperature, salinity, and increasingly, biogeochemical parameters like oxygen and pH. Would you like to see data from specific floats or regions?",
+                "The ARGO network provides unprecedented ocean coverage. Each float follows a precise cycle: drift at 1000m for 10 days, dive to 2000m, then surface while measuring profiles. This gives us real-time ocean conditions worldwide. I can locate the nearest floats to any coordinates you specify.",
+                "ARGO data quality is exceptional - each profile is automatically quality-controlled and provides sub-surface ocean conditions that satellites cannot detect. The data is freely available and updates our understanding of ocean climate daily."
+            ],
+            marine_life: [
+                "Marine biodiversity is incredible! The Indian Ocean hosts over 3,000 fish species and 600+ coral species. From microscopic plankton to blue whales, each organism plays a crucial role in ocean ecosystems. Ocean temperature and chemistry directly affect species distribution and migration patterns.",
+                "Ocean conditions strongly influence marine life. Warmer waters support more diverse coral reefs but can cause bleaching events. Cold upwelling zones create nutrient-rich environments supporting massive fish populations. ARGO data helps us understand these habitat relationships.",
+                "Climate change is reshaping marine ecosystems. Species are migrating poleward, coral reefs face bleaching stress, and ocean acidification affects shell-forming organisms. Real-time ocean data helps us monitor and predict these changes."
+            ],
+            currents: [
+                "Ocean currents are Earth's climate engine! The Gulf Stream transports warm water northward at 30 Sverdrups (30 million cubic meters per second), while the Antarctic Circumpolar Current is the world's strongest, connecting all oceans. ARGO floats help us track these massive water movements.",
+                "Current patterns drive global climate. The thermohaline circulation - our 'global conveyor belt' - is driven by temperature and salinity differences that ARGO floats monitor. Changes in this circulation could dramatically affect regional climates worldwide.",
+                "Upwelling currents bring deep, nutrient-rich water to the surface, creating some of the ocean's most productive ecosystems. The Benguela, California, and Peru currents support major fisheries through this process."
+            ],
+            general: [
+                "I can help you explore any aspect of oceanography! Whether you're interested in physical oceanography (temperature, salinity, currents), marine biology, climate science, or data analysis, I have access to real-time ARGO data and comprehensive ocean knowledge.",
+                "Our oceans cover 71% of Earth's surface and contain 97% of its water. They regulate climate, support biodiversity, and provide resources for billions of people. What specific aspect would you like to explore?",
+                "Ocean science is rapidly evolving with new technologies like ARGO floats, satellite observations, and autonomous underwater vehicles. I can explain any of these technologies or help analyze the data they collect."
+            ]
+        };
+
+        // Function to get AI response based on message content
+        function getAIResponse(message) {
+            const lowerMessage = message.toLowerCase();
+            
+            if (lowerMessage.includes('temperature') || lowerMessage.includes('warm') || lowerMessage.includes('cold') || lowerMessage.includes('thermal')) {
+                return aiResponses.temperature[Math.floor(Math.random() * aiResponses.temperature.length)];
+            } else if (lowerMessage.includes('salinity') || lowerMessage.includes('salt') || lowerMessage.includes('psu')) {
+                return aiResponses.salinity[Math.floor(Math.random() * aiResponses.salinity.length)];
+            } else if (lowerMessage.includes('argo') || lowerMessage.includes('float') || lowerMessage.includes('data') || lowerMessage.includes('measurement')) {
+                return aiResponses.argo[Math.floor(Math.random() * aiResponses.argo.length)];
+            } else if (lowerMessage.includes('fish') || lowerMessage.includes('marine life') || lowerMessage.includes('biodiversity') || lowerMessage.includes('species') || lowerMessage.includes('coral')) {
+                return aiResponses.marine_life[Math.floor(Math.random() * aiResponses.marine_life.length)];
+            } else if (lowerMessage.includes('current') || lowerMessage.includes('circulation') || lowerMessage.includes('flow') || lowerMessage.includes('gulf stream')) {
+                return aiResponses.currents[Math.floor(Math.random() * aiResponses.currents.length)];
+            } else {
+                return aiResponses.general[Math.floor(Math.random() * aiResponses.general.length)];
+            }
+        }
+
+        // Send suggestion
+        function sendSuggestion(button) {
+            const suggestionText = button.querySelector('span').textContent.replace(/"/g, '');
+            chatInput.value = suggestionText;
+            sendMessage();
+        }
+
+        // Chat form submission
+        chatForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            sendMessage();
+        });
+
+        // Send message function
+        function sendMessage() {
+            const message = chatInput.value.trim();
+            if (!message) return;
+
+            // Add user message
+            addMessage(message, 'user');
+            chatInput.value = '';
+
+            // Show typing indicator
+            showTypingIndicator();
+
+            // Simulate AI response delay
+            setTimeout(() => {
+                hideTypingIndicator();
+                const response = getAIResponse(message);
+                addMessage(response, 'ai');
+            }, 1000 + Math.random() * 2000); // 1-3 second delay
+        }
+
+        // Add message to chat
+        function addMessage(content, sender) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}-message`;
+            
+            const currentTime = new Date().toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'});
+            
+            if (sender === 'ai') {
+                messageDiv.innerHTML = `
+                    <div class="message-avatar">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="message-content">
+                        <div class="message-text">${content}</div>
+                        <div class="message-time">${currentTime}</div>
+                        <div class="message-actions">
+                            <button class="action-btn" title="Copy message">
+                                <i class="fas fa-copy"></i>
+                            </button>
+                            <button class="action-btn" title="Like response">
+                                <i class="fas fa-thumbs-up"></i>
+                            </button>
+                            <button class="action-btn" title="Dislike response">
+                                <i class="fas fa-thumbs-down"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            } else {
+                messageDiv.innerHTML = `
+                    <div class="message-content">
+                        <div class="message-text">${content}</div>
+                        <div class="message-time">${currentTime}</div>
+                    </div>
+                    <div class="message-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                `;
+            }
+            
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        // Show/hide typing indicator
+        function showTypingIndicator() {
+            typingIndicator.style.display = 'flex';
+            typingIndicator.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function hideTypingIndicator() {
+            typingIndicator.style.display = 'none';
+        }
+
+        // Footer functions
+        function clearChat() {
+            if (confirm('Are you sure you want to clear the chat history?')) {
+                chatMessages.innerHTML = `
+                    <div class="message ai-message welcome-message">
+                        <div class="message-avatar">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div class="message-content">
+                            <div class="message-text">
+                                Chat cleared! I'm ready to help you with any oceanographic questions.
+                            </div>
+                            <div class="message-time">Just now</div>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        function exportChat() {
+            alert('Export functionality would generate a PDF or text file of the conversation.');
+        }
+
+        function shareChat() {
+            alert('Share functionality would generate a shareable link to this conversation.');
+        }
+
+        // Auto-resize input
+        chatInput.addEventListener('input', function() {
+            this.style.height = 'auto';
+            this.style.height = Math.min(this.scrollHeight, 120) + 'px';
+        });
+
+        // Enter key handling
+        chatInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage();
+            }
+        });
+
+        console.log('🤖 OceanAI Assistant loaded and ready!');
+    </script>
+</body>
+</html>

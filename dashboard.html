@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OceanAI Dashboard - Real-time Ocean Data Analytics</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            background: url('https://upload.wikimedia.org/wikipedia/en/2/2c/SZA_-_S.O.S.png') center/cover no-repeat fixed;
+            min-height: 100vh;
+            position: relative;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(2px);
+            z-index: -1;
+        }
+        
+        .dashboard-page {
+            padding-top: 80px;
+            min-height: 100vh;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .dashboard-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .dashboard-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .dashboard-title {
+            font-size: 3rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #22d3ee, #a7f3d0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .dashboard-subtitle {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .data-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .data-widget {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .data-widget:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .widget-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .widget-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #0ea5e9, #22d3ee);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+        
+        .widget-title {
+            color: white;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+        
+        .data-value {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #22d3ee;
+            margin-bottom: 0.5rem;
+        }
+        
+        .data-label {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .data-trend {
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .trend-up {
+            background: rgba(16, 185, 129, 0.2);
+            color: #10b981;
+        }
+        
+        .trend-down {
+            background: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+        }
+        
+        .trend-stable {
+            background: rgba(251, 191, 36, 0.2);
+            color: #fbbf24;
+        }
+        
+        .chart-placeholder {
+            height: 200px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+            margin-top: 1rem;
+            border: 2px dashed rgba(255, 255, 255, 0.2);
+        }
+        
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .status-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1rem;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .status-count {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+        }
+        
+        .status-label {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.8rem;
+            margin-top: 0.5rem;
+        }
+        
+        .alert-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .alert-message {
+            color: white;
+            font-size: 0.9rem;
+        }
+        
+        .alert-time {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.8rem;
+        }
+        
+        .api-endpoints {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            margin-top: 2rem;
+        }
+        
+        .api-title {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .endpoint-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            border-left: 4px solid #22d3ee;
+        }
+        
+        .endpoint-method {
+            color: #10b981;
+            font-weight: 600;
+            font-family: monospace;
+        }
+        
+        .endpoint-url {
+            color: #22d3ee;
+            font-family: monospace;
+            margin: 0.5rem 0;
+        }
+        
+        .endpoint-desc {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+        
+        .back-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+        }
+        
+        .back-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        @media (max-width: 768px) {
+            .dashboard-title {
+                font-size: 2rem;
+            }
+            
+            .data-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .dashboard-container {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-button">
+        <i class="fas fa-arrow-left"></i>
+        Back to Home
+    </a>
+
+    <div class="dashboard-page">
+        <div class="dashboard-container">
+            <div class="dashboard-header">
+                <h1 class="dashboard-title">
+                    <i class="fas fa-chart-line"></i>
+                    OceanAI Data Dashboard
+                </h1>
+                <p class="dashboard-subtitle">
+                    Real-time oceanographic data analytics powered by ARGO floats and AI-driven insights
+                </p>
+            </div>
+
+            <div class="data-grid">
+                <!-- Temperature Analytics -->
+                <div class="data-widget">
+                    <div class="widget-header">
+                        <div class="widget-icon">
+                            <i class="fas fa-thermometer-half"></i>
+                        </div>
+                        <h3 class="widget-title">Global Ocean Temperature</h3>
+                    </div>
+                    <div class="data-value" id="globalTemp">17.3°C</div>
+                    <div class="data-label">Average Surface Temperature</div>
+                    <div class="data-trend trend-up">
+                        <i class="fas fa-arrow-up"></i>
+                        +0.2°C from last month
+                    </div>
+                    <div class="chart-placeholder" style="padding: 0; background: none;">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Global_Sea_Surface_Temperature.png/800px-Global_Sea_Surface_Temperature.png" 
+                             alt="Global Ocean Temperature Map" 
+                             style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px; opacity: 0.8;"
+                             onerror="this.parentElement.innerHTML='[Temperature Trend Chart - Connect to /api/temperature-data]'; this.parentElement.style.background='rgba(255, 255, 255, 0.05)'; this.parentElement.style.display='flex'; this.parentElement.style.alignItems='center'; this.parentElement.style.justifyContent='center'; this.parentElement.style.color='rgba(255, 255, 255, 0.5)';">
+                    </div>
+                </div>
+
+                <!-- Salinity Monitoring -->
+                <div class="data-widget">
+                    <div class="widget-header">
+                        <div class="widget-icon">
+                            <i class="fas fa-tint"></i>
+                        </div>
+                        <h3 class="widget-title">Ocean Salinity Levels</h3>
+                    </div>
+                    <div class="data-value" id="salinity">35.1‰</div>
+                    <div class="data-label">Global Average Salinity</div>
+                    <div class="data-trend trend-stable">
+                        <i class="fas fa-minus"></i>
+                        Stable (±0.1‰)
+                    </div>
+                    <div class="chart-placeholder">
+                        [Salinity Distribution Map - Connect to /api/salinity-data]
+                    </div>
+                </div>
+
+                <!-- ARGO Float Status -->
+                <div class="data-widget">
+                    <div class="widget-header">
+                        <div class="widget-icon">
+                            <i class="fas fa-anchor"></i>
+                        </div>
+                        <h3 class="widget-title">ARGO Float Network</h3>
+                    </div>
+                    <div class="data-value" id="activeFloats">3,847</div>
+                    <div class="data-label">Active Floats Globally</div>
+                    <div class="status-grid">
+                        <div class="status-item">
+                            <div class="status-count" style="color: #10b981;">3,624</div>
+                            <div class="status-label">Active</div>
+                        </div>
+                        <div class="status-item">
+                            <div class="status-count" style="color: #fbbf24;">153</div>
+                            <div class="status-label">Warning</div>
+                        </div>
+                        <div class="status-item">
+                            <div class="status-count" style="color: #ef4444;">70</div>
+                            <div class="status-label">Offline</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Data Processing Metrics -->
+                <div class="data-widget">
+                    <div class="widget-header">
+                        <div class="widget-icon">
+                            <i class="fas fa-cogs"></i>
+                        </div>
+                        <h3 class="widget-title">Data Processing</h3>
+                    </div>
+                    <div class="data-value" id="dailyProfiles">12,847</div>
+                    <div class="data-label">Profiles Processed Today</div>
+                    <div class="data-trend trend-up">
+                        <i class="fas fa-arrow-up"></i>
+                        +8% from yesterday
+                    </div>
+                    <div class="chart-placeholder">
+                        [Processing Rate Chart - Connect to /api/processing-stats]
+                    </div>
+                </div>
+
+                <!-- AI Query Analytics -->
+                <div class="data-widget">
+                    <div class="widget-header">
+                        <div class="widget-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h3 class="widget-title">AI Query Performance</h3>
+                    </div>
+                    <div class="data-value" id="querySuccess">98.7%</div>
+                    <div class="data-label">Query Success Rate</div>
+                    <div class="data-trend trend-up">
+                        <i class="fas fa-arrow-up"></i>
+                        +0.3% improvement
+                    </div>
+                    <div class="chart-placeholder">
+                        [Query Analytics - Connect to /api/ai-metrics]
+                    </div>
+                </div>
+
+                <!-- Recent System Alerts -->
+                <div class="data-widget">
+                    <div class="widget-header">
+                        <div class="widget-icon">
+                            <i class="fas fa-bell"></i>
+                        </div>
+                        <h3 class="widget-title">System Alerts</h3>
+                    </div>
+                    <div id="alertsList">
+                        <div class="alert-item">
+                            <div class="alert-message">
+                                <i class="fas fa-exclamation-triangle" style="color: #fbbf24;"></i>
+                                Temperature anomaly detected in North Pacific
+                            </div>
+                            <div class="alert-time">2h ago</div>
+                        </div>
+                        <div class="alert-item">
+                            <div class="alert-message">
+                                <i class="fas fa-info-circle" style="color: #22d3ee;"></i>
+                                New ARGO float deployed in Indian Ocean
+                            </div>
+                            <div class="alert-time">4h ago</div>
+                        </div>
+                        <div class="alert-item">
+                            <div class="alert-message">
+                                <i class="fas fa-check-circle" style="color: #10b981;"></i>
+                                Data synchronization completed successfully
+                            </div>
+                            <div class="alert-time">6h ago</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Backend API Integration Guide -->
+            <div class="api-endpoints">
+                <h2 class="api-title">
+                    <i class="fas fa-plug"></i>
+                    Backend API Integration Points
+                </h2>
+                
+                <div class="endpoint-item">
+                    <div class="endpoint-method">GET</div>
+                    <div class="endpoint-url">/api/ocean/temperature</div>
+                    <div class="endpoint-desc">Retrieve global ocean temperature data and trends</div>
+                </div>
+                
+                <div class="endpoint-item">
+                    <div class="endpoint-method">GET</div>
+                    <div class="endpoint-url">/api/ocean/salinity</div>
+                    <div class="endpoint-desc">Get salinity measurements and distribution maps</div>
+                </div>
+                
+                <div class="endpoint-item">
+                    <div class="endpoint-method">GET</div>
+                    <div class="endpoint-url">/api/argo/floats</div>
+                    <div class="endpoint-desc">ARGO float status, locations, and health metrics</div>
+                </div>
+                
+                <div class="endpoint-item">
+                    <div class="endpoint-method">GET</div>
+                    <div class="endpoint-url">/api/processing/stats</div>
+                    <div class="endpoint-desc">Data processing metrics and performance statistics</div>
+                </div>
+                
+                <div class="endpoint-item">
+                    <div class="endpoint-method">POST</div>
+                    <div class="endpoint-url">/api/query/natural-language</div>
+                    <div class="endpoint-desc">Process natural language queries and return ocean data insights</div>
+                </div>
+                
+                <div class="endpoint-item">
+                    <div class="endpoint-method">GET</div>
+                    <div class="endpoint-url">/api/alerts/recent</div>
+                    <div class="endpoint-desc">Fetch recent system alerts and anomaly notifications</div>
+                </div>
+                
+                <div class="endpoint-item">
+                    <div class="endpoint-method">GET</div>
+                    <div class="endpoint-url">/api/data/export/{format}</div>
+                    <div class="endpoint-desc">Export data in NetCDF, CSV, JSON, or Parquet formats</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Simulate real-time data updates
+        function updateDashboardData() {
+            // Simulate temperature fluctuations
+            const tempElement = document.getElementById('globalTemp');
+            const baseTemp = 17.3;
+            const variation = (Math.random() - 0.5) * 0.4;
+            tempElement.textContent = (baseTemp + variation).toFixed(1) + '°C';
+
+            // Simulate salinity changes
+            const salinityElement = document.getElementById('salinity');
+            const baseSalinity = 35.1;
+            const salinityVariation = (Math.random() - 0.5) * 0.2;
+            salinityElement.textContent = (baseSalinity + salinityVariation).toFixed(1) + '‰';
+
+            // Simulate float count changes
+            const floatElement = document.getElementById('activeFloats');
+            const baseFloats = 3847;
+            const floatVariation = Math.floor((Math.random() - 0.5) * 10);
+            floatElement.textContent = (baseFloats + floatVariation).toLocaleString();
+
+            // Simulate daily profiles
+            const profilesElement = document.getElementById('dailyProfiles');
+            const baseProfiles = 12847;
+            const profileVariation = Math.floor((Math.random() - 0.5) * 100);
+            profilesElement.textContent = (baseProfiles + profileVariation).toLocaleString();
+
+            // Simulate query success rate
+            const queryElement = document.getElementById('querySuccess');
+            const baseSuccess = 98.7;
+            const successVariation = (Math.random() - 0.5) * 0.6;
+            queryElement.textContent = (baseSuccess + successVariation).toFixed(1) + '%';
+        }
+
+        // Update data every 5 seconds to simulate real-time updates
+        setInterval(updateDashboardData, 5000);
+
+        // Initial data load animation
+        document.addEventListener('DOMContentLoaded', function() {
+            const widgets = document.querySelectorAll('.data-widget');
+            widgets.forEach((widget, index) => {
+                widget.style.opacity = '0';
+                widget.style.transform = 'translateY(20px)';
+                
+                setTimeout(() => {
+                    widget.style.transition = 'all 0.6s ease';
+                    widget.style.opacity = '1';
+                    widget.style.transform = 'translateY(0)';
+                }, index * 150);
+            });
+        });
+
+        console.log('🌊 OceanAI Dashboard loaded! Ready for backend integration.');
+    </script>
+</body>
+</html>
